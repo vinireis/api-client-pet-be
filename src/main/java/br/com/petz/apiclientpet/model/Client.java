@@ -1,5 +1,7 @@
 package br.com.petz.apiclientpet.model;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +20,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.petz.apiclientpet.model.enums.GenderType;
+import br.com.petz.apiclientpet.service.encrypt.PasswordEncrypter;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -63,4 +66,12 @@ public class Client {
 	@NotBlank(message = "CPF Empty")
 	@ToString.Exclude
 	private String cpf;
+
+	public void encryptPassword(PasswordEncrypter passwordEncrypter) throws NoSuchAlgorithmException {
+		this.credential.encryptPassword(passwordEncrypter);
+	}
+
+	public String getEmail() {
+		return this.credential.getEmail();
+	}
 }

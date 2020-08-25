@@ -1,6 +1,7 @@
 package br.com.petz.apiclientpet.api;
 
 import java.net.URI;
+import java.security.NoSuchAlgorithmException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -51,7 +52,7 @@ public class ClientController implements ClientAPI {
 	}
 
 	@Override
-	public ResponseEntity<ClientDetailDTO> create(ClientForm form, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<ClientDetailDTO> create(ClientForm form, UriComponentsBuilder uriBuilder) throws NoSuchAlgorithmException {
 		log.info("Starting Method Create in Client Controller!");
 		log.info("Form: {}", form);
 		Client client = clientService.save(form.buildClient());

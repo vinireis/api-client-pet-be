@@ -53,6 +53,7 @@ public class ClientForm {
 	
 	@NotBlank
 	@Min(value = 6,message = "Password must be at least 6 char")
+	@ToString.Exclude
 	private String password;
 	
 	public Client buildClient() {

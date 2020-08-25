@@ -1,5 +1,7 @@
 package br.com.petz.apiclientpet.api;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -33,7 +35,7 @@ public interface ClientAPI {
 	ClientDetailDTO findByCode(@PathVariable String clientCode) throws NotFound;
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	ResponseEntity<ClientDetailDTO> create(@RequestBody @Valid ClientForm form, UriComponentsBuilder uri);
+	ResponseEntity<ClientDetailDTO> create(@RequestBody @Valid ClientForm form, UriComponentsBuilder uri) throws NoSuchAlgorithmException;
 
 	@PutMapping("/{clientCode}")
 	@ResponseStatus(value = HttpStatus.OK)

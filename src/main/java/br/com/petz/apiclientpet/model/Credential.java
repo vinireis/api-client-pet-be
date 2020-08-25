@@ -1,8 +1,11 @@
 package br.com.petz.apiclientpet.model;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
+import br.com.petz.apiclientpet.service.encrypt.PasswordEncrypter;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,4 +22,8 @@ public class Credential {
 	@Email
 	@Column(unique = true)
 	private String email;
+
+	public void encryptPassword(PasswordEncrypter passwordEncrypter) throws NoSuchAlgorithmException {
+		this.password = passwordEncrypter.encrypt(password);
+	}
 }
