@@ -57,4 +57,8 @@ public class ClientForm {
 	public Client buildClient() {
 		return null;
 	}
+
+	public Client buildClient(String clientCode) {
+		return null;
+	}
 }
