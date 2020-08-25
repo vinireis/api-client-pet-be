@@ -12,11 +12,13 @@ import org.hibernate.validator.constraints.br.CPF;
 import br.com.petz.apiclientpet.model.Client;
 import br.com.petz.apiclientpet.model.enums.GenderType;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.ToString;
 
 @AllArgsConstructor
 @Valid
 @ToString
+@Getter
 public class ClientForm {
 	@NotBlank(message = "Name Empty")
 	@Pattern(regexp = "^[A-Z][a-z]*\\s.*[A-Z][a-z]*$",message = "Fullname Not Valid")
@@ -43,7 +45,8 @@ public class ClientForm {
 	@NotNull(message = "Gender Not Valid!")
 	private GenderType gender;
 	
-	@CPF
+	@CPF(message = "CPF Not Valid")
+	@NotBlank(message = "CPF Empty")
 	@ToString.Exclude
 	private String cpf;
 	
