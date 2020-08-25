@@ -1,30 +1,57 @@
 package br.com.petz.apiclientpet.api.dto.form;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.br.CPF;
+
+import br.com.petz.apiclientpet.model.Client;
+import br.com.petz.apiclientpet.model.enums.GenderType;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+
+@AllArgsConstructor
+@Valid
+@ToString
 public class ClientForm {
-	private String name;
+	@NotBlank(message = "Name Empty")
+	@Pattern(regexp = "^[A-Z][a-z]*\\s.*[A-Z][a-z]*$",message = "Fullname Not Valid")
+	private String fullName;
+	
+	@NotBlank(message = "Email Empty")
+	@Email(message = "Email Not Valid")
 	private String email;
-	private String code;
-
-	public ClientForm(String name, String email, String code) {
-		this.name = name;
-		this.email = email;
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	@Override
-	public String toString() {
-		return "ClientForm [name=" + name + ", email=" + email + ", code=" + code + "]";
+	
+	@NotBlank(message = "Prefix Cellphone Number Empty")
+	@Pattern(regexp = "[1-9]{2}",message = "Prefix Cellphone Number Not Valid")
+	private String prefixCellPhoneNumber;
+	
+	@NotBlank(message = "Cellphone Number Empty")
+	@Pattern(regexp = "^9[1-9][0-9]{3}\\-[0-9]{4}$",message = "Cellphone Number Not Valid")
+	private String cellPhoneNumber;
+	
+	@Pattern(regexp = "[1-9]{2}",message = "Prefix Telephone Number Not Valid")
+	private String prefixPhoneNumber;
+	
+	@Pattern(regexp = "^9[1-9][0-9]{3}\\-[0-9]{4}$",message = "Telephone Number Not Valid")
+	private String phoneNumber;
+	
+	@NotNull(message = "Gender Not Valid!")
+	private GenderType gender;
+	
+	@CPF
+	@ToString.Exclude
+	private String cpf;
+	
+	@NotBlank
+	@Min(value = 6,message = "Password must be at least 6 char")
+	private String password;
+	
+	public Client buildClient() {
+		return null;
 	}
 }
