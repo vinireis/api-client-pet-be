@@ -76,6 +76,8 @@ public class ClientForm {
 	}
 
 	public Client buildClient(String clientCode) {
-		return null;
+		Client client = this.buildClient();
+		client.setCode(clientCode);
+		return client;
 	}
 }
