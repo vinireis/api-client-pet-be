@@ -10,6 +10,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.petz.apiclientpet.model.Client;
+import br.com.petz.apiclientpet.model.Credential;
 import br.com.petz.apiclientpet.model.enums.GenderType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,7 +56,23 @@ public class ClientForm {
 	private String password;
 	
 	public Client buildClient() {
-		return null;
+		return Client.builder()
+				.fullName(fullName)
+				.credential(buildCredential())
+				.prefixCellPhoneNumber(prefixCellPhoneNumber)
+				.cellPhoneNumber(cellPhoneNumber)
+				.prefixPhoneNumber(prefixPhoneNumber)
+				.phoneNumber(phoneNumber)
+				.gender(gender)
+				.cpf(cpf)
+				.build();
+	}
+
+	private Credential buildCredential() {
+		return Credential.builder()
+				.email(email)
+				.password(password)
+				.build();
 	}
 
 	public Client buildClient(String clientCode) {
