@@ -8,10 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.petz.apiclientpet.model.enums.GenderType;
 import br.com.petz.apiclientpet.model.enums.PetType;
@@ -54,9 +57,15 @@ public class Pet {
 
 	private String color;
 	private Long weight;
-	
+
 	public void buildCode() {
 		String firstClientName = this.client.getFullName().split(" ")[0];
 		this.code = this.petName.concat(firstClientName.concat(this.client.getCpf().substring(0, 3))).toLowerCase();
+	}
+
+	@JsonIgnore
+	@Transient
+	public String getClientCode() {
+		return this.client.getCode();
 	}
 }
