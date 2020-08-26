@@ -21,12 +21,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.petz.apiclientpet.model.enums.GenderType;
 import br.com.petz.apiclientpet.service.encrypt.PasswordEncrypter;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Valid
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "client")
@@ -80,5 +84,14 @@ public class Client {
 		String firstName = nameParts[0];
 		String lastName = nameParts[nameParts.length - 1];
 		this.code = firstName.concat(lastName).concat(this.cpf.substring(0, 3)).toLowerCase();
+	}
+
+	public void update(Client buildClientByDTO) {
+		this.fullName = buildClientByDTO.getFullName();
+		this.prefixCellPhoneNumber = buildClientByDTO.getPrefixCellPhoneNumber();
+		this.cellPhoneNumber = buildClientByDTO.getCellPhoneNumber();
+		this.prefixPhoneNumber = buildClientByDTO.getPrefixPhoneNumber();
+		this.phoneNumber = buildClientByDTO.getPhoneNumber();
+		this.gender = buildClientByDTO.getGender();
 	}
 }

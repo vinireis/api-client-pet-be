@@ -1,12 +1,13 @@
 package br.com.petz.apiclientpet.service;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException.NotFound;
 
+import br.com.petz.apiclientpet.exception.ApiException;
 import br.com.petz.apiclientpet.model.Client;
 import br.com.petz.apiclientpet.repository.ClientRepository;
 import br.com.petz.apiclientpet.service.encrypt.PasswordEncrypter;
@@ -25,14 +26,24 @@ public class ClientSpringDataJPAService implements ClientService {
 
 	@Override
 	public Page<Client> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Starting Method findAll in ClientSpringDataJPAService");
+		Page<Client> allClients = clientRepository.findAll(pageable);
+		log.info("finishing Method findAll in ClientSpringDataJPAService");
+		return allClients;
 	}
 
 	@Override
-	public Client findByCode(String clientCode) throws NotFound {
-		// TODO Auto-generated method stub
-		return null;
+	public Client findByCode(String clientCode) throws ApiException {
+		log.info("Starting Method findByCode in ClientSpringDataJPAService");
+		log.info("Parameter:{}", clientCode);
+		log.info("Finding client by code on clientRepository");
+		Optional<Client> clientByCode = clientRepository.findByCode(clientCode);
+		if (clientByCode.isPresent()) {
+			log.info("Finishing Method findByCode in ClientSpringDataJPAService");
+			return clientByCode.get();
+		} else {
+			throw throwNotFoundApiException(clientCode);
+		}
 	}
 
 	@Override
@@ -49,13 +60,29 @@ public class ClientSpringDataJPAService implements ClientService {
 	}
 
 	@Override
-	public Client update(Client buildClient) throws NotFound {
-		// TODO Auto-generated method stub
-		return null;
+	public Client update(Client buildClientByDTO) throws ApiException {
+		log.info("Starting Method update in ClientSpringDataJPAService");
+		log.info("Parameter:{}", buildClientByDTO.getCode());
+		Client clientByCode = this.findByCode(buildClientByDTO.getCode());
+		clientByCode.update(buildClientByDTO);
+		log.info("Updating client on clientRepository");
+		clientRepository.save(clientByCode);
+		log.info("Finishing Method update in ClientSpringDataJPAService");
+		return clientByCode;
 	}
 
 	@Override
-	public void deleteByCode(String clientCode) throws NotFound {
-		// TODO Auto-generated method stub
+	public void deleteByCode(String clientCode) throws ApiException {
+		log.info("Starting Method deleteByCode in ClientSpringDataJPAService");
+		log.info("Parameter:{}", clientCode);
+		log.info("Deleting client by code on clientRepository");
+		clientRepository.delete(this.findByCode(clientCode));
+		log.info("Finishing Method deleteByCode in ClientSpringDataJPAService");
+	}
+
+	private ApiException throwNotFoundApiException(String clientCode) {
+		String message = "NOT FOUND CLIENT TO CODE:" + clientCode;
+		log.warn(message + " in ClientSpringDataJPAService");
+		return new ApiException(404L, message);
 	}
 }

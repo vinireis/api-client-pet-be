@@ -13,12 +13,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException.NotFound;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.petz.apiclientpet.api.dto.ClientDTO;
 import br.com.petz.apiclientpet.api.dto.ClientDetailDTO;
 import br.com.petz.apiclientpet.api.dto.form.ClientForm;
+import br.com.petz.apiclientpet.exception.ApiException;
 import br.com.petz.apiclientpet.model.Client;
 import br.com.petz.apiclientpet.service.ClientService;
 import lombok.extern.log4j.Log4j2;
@@ -43,7 +43,7 @@ public class ClientController implements ClientAPI {
 	}
 
 	@Override
-	public ClientDetailDTO findByCode(@PathVariable @NotNull String clientCode) throws NotFound {
+	public ClientDetailDTO findByCode(@PathVariable @NotNull String clientCode) throws ApiException {
 		log.info("Starting Method findByCode in Client Controller!");
 		log.info("Parameter clientCode = {}", clientCode);
 		Client client = clientService.findByCode(clientCode);
@@ -52,7 +52,8 @@ public class ClientController implements ClientAPI {
 	}
 
 	@Override
-	public ResponseEntity<ClientDetailDTO> create(ClientForm form, UriComponentsBuilder uriBuilder) throws NoSuchAlgorithmException {
+	public ResponseEntity<ClientDetailDTO> create(ClientForm form, UriComponentsBuilder uriBuilder)
+			throws NoSuchAlgorithmException, ApiException {
 		log.info("Starting Method Create in Client Controller!");
 		log.info("Form: {}", form);
 		Client client = clientService.save(form.buildClient());
@@ -62,7 +63,7 @@ public class ClientController implements ClientAPI {
 	}
 
 	@Override
-	public ClientDetailDTO update(String clientCode, @Valid ClientForm form) throws NotFound {
+	public ClientDetailDTO update(String clientCode, @Valid ClientForm form) throws ApiException {
 		log.info("Starting Method Update in Client Controller!");
 		log.info("Form: {}", form);
 		Client client = clientService.update(form.buildClient(clientCode));
@@ -71,7 +72,7 @@ public class ClientController implements ClientAPI {
 	}
 
 	@Override
-	public void deleteByCode(String clientCode) throws NotFound {
+	public void deleteByCode(String clientCode) throws ApiException {
 		log.info("Starting Method Delete in Client Controller!");
 		clientService.deleteByCode(clientCode);
 		log.info("Finishing Method Delete in Client Controller!");

@@ -6,12 +6,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 import br.com.petz.apiclientpet.service.encrypt.PasswordEncrypter;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "credentials")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Credential {
 	@Id

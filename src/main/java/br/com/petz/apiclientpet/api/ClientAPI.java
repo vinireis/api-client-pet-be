@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException.NotFound;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.petz.apiclientpet.api.dto.ClientDTO;
 import br.com.petz.apiclientpet.api.dto.ClientDetailDTO;
 import br.com.petz.apiclientpet.api.dto.form.ClientForm;
+import br.com.petz.apiclientpet.exception.ApiException;
 
 @RestController
 @RequestMapping("/v1/client")
@@ -32,16 +32,16 @@ public interface ClientAPI {
 	Page<ClientDTO> findAll(Pageable pageable);
 	@GetMapping("/{clientCode}")
 	@ResponseStatus(value = HttpStatus.OK)
-	ClientDetailDTO findByCode(@PathVariable String clientCode) throws NotFound;
+	ClientDetailDTO findByCode(@PathVariable String clientCode) throws ApiException;
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	ResponseEntity<ClientDetailDTO> create(@RequestBody @Valid ClientForm form, UriComponentsBuilder uri) throws NoSuchAlgorithmException;
+	ResponseEntity<ClientDetailDTO> create(@RequestBody @Valid ClientForm form, UriComponentsBuilder uri) throws NoSuchAlgorithmException,ApiException;
 
 	@PutMapping("/{clientCode}")
 	@ResponseStatus(value = HttpStatus.OK)
-	ClientDetailDTO update(@PathVariable String clientCode,@RequestBody @Valid ClientForm form) throws NotFound;
+	ClientDetailDTO update(@PathVariable String clientCode,@RequestBody @Valid ClientForm form) throws ApiException;
 
 	@DeleteMapping("/{clientCode}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	void deleteByCode(@PathVariable String clientCode) throws NotFound;
+	void deleteByCode(@PathVariable String clientCode) throws ApiException;
 }
