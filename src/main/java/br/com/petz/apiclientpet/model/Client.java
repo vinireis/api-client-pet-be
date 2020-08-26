@@ -1,6 +1,7 @@
 package br.com.petz.apiclientpet.model;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -70,6 +72,9 @@ public class Client {
 	@NotBlank(message = "CPF Empty")
 	@ToString.Exclude
 	private String cpf;
+
+	@OneToMany(mappedBy = "client")
+	private List<Pet> pets;
 
 	public void encryptPassword(PasswordEncrypter passwordEncrypter) throws NoSuchAlgorithmException {
 		this.credential.encryptPassword(passwordEncrypter);
