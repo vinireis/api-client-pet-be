@@ -18,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.petz.apiclientpet.api.dto.ClientDTO;
 import br.com.petz.apiclientpet.api.dto.ClientDetailDTO;
 import br.com.petz.apiclientpet.api.dto.form.ClientForm;
+import br.com.petz.apiclientpet.api.dto.form.ClientUpdateForm;
 import br.com.petz.apiclientpet.exception.ApiException;
 import br.com.petz.apiclientpet.model.Client;
 import br.com.petz.apiclientpet.service.ClientService;
@@ -63,7 +64,7 @@ public class ClientController implements ClientAPI {
 	}
 
 	@Override
-	public ClientDetailDTO update(String clientCode, @Valid ClientForm form) throws ApiException {
+	public ClientDetailDTO update(String clientCode, @Valid ClientUpdateForm form) throws ApiException {
 		log.info("Starting Method Update in Client Controller!");
 		log.info("Form: {}", form);
 		Client client = clientService.update(form.buildClient(clientCode));

@@ -22,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.petz.apiclientpet.api.dto.ClientDTO;
 import br.com.petz.apiclientpet.api.dto.ClientDetailDTO;
 import br.com.petz.apiclientpet.api.dto.form.ClientForm;
+import br.com.petz.apiclientpet.api.dto.form.ClientUpdateForm;
 import br.com.petz.apiclientpet.exception.ApiException;
 
 @RestController
@@ -39,7 +40,7 @@ public interface ClientAPI {
 
 	@PutMapping("/{clientCode}")
 	@ResponseStatus(value = HttpStatus.OK)
-	ClientDetailDTO update(@PathVariable String clientCode,@RequestBody @Valid ClientForm form) throws ApiException;
+	ClientDetailDTO update(@PathVariable String clientCode,@RequestBody @Valid ClientUpdateForm form) throws ApiException;
 
 	@DeleteMapping("/{clientCode}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
