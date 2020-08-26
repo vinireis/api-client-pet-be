@@ -1,5 +1,8 @@
 package br.com.petz.apiclientpet.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import br.com.petz.apiclientpet.model.Client;
 import br.com.petz.apiclientpet.model.enums.GenderType;
 import lombok.EqualsAndHashCode;
@@ -9,6 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
+@JsonInclude(Include.NON_NULL)
 public class ClientDetailDTO {
 	private String fullName;
 	private String code;

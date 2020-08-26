@@ -29,7 +29,7 @@ import br.com.petz.apiclientpet.exception.ApiException;
 public interface PetAPI {
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)
-	Page<PetDTO> findByClientCode(@PathVariable String clientCode, Pageable pageable);
+	Page<PetDTO> findByClientCode(@PathVariable String clientCode, Pageable pageable) throws ApiException;
 
 	@GetMapping("/{petCode}")
 	@ResponseStatus(value = HttpStatus.OK)

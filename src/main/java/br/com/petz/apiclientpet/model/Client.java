@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -41,6 +42,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+	@Column(unique = true)
 	private String code;
 	
     @JsonIgnore 
@@ -71,6 +73,7 @@ public class Client {
 	@CPF(message = "CPF Not Valid")
 	@NotBlank(message = "CPF Empty")
 	@ToString.Exclude
+	@Column(unique = true,updatable = false)
 	private String cpf;
 
 	@OneToMany(mappedBy = "client")

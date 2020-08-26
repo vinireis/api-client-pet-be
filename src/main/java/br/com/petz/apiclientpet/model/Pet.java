@@ -1,5 +1,6 @@
 package br.com.petz.apiclientpet.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,15 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.petz.apiclientpet.exception.ApiException;
 import br.com.petz.apiclientpet.model.enums.GenderType;
 import br.com.petz.apiclientpet.model.enums.PetType;
 import br.com.petz.apiclientpet.model.enums.SizeType;
+import br.com.petz.apiclientpet.service.ClientService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,10 +39,11 @@ public class Pet {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(unique = true)
 	private String code;
 
 	@NotBlank(message = "Petname Empty")
-	@Min(value = 3, message = "Petname must be at least 3 char")
+	@Size(min = 3, message = "Petname must be at least 3 char")
 	private String petName;
 
 	@NotNull(message = "Size Not Valid!")
@@ -52,20 +56,35 @@ public class Pet {
 	private GenderType gender;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "client_id", referencedColumnName = "id")
+	@JoinColumn(name = "client_id", referencedColumnName = "id", updatable = false)
 	private Client client;
 
 	private String color;
 	private Long weight;
 
 	public void buildCode() {
-		String firstClientName = this.client.getFullName().split(" ")[0];
-		this.code = this.petName.concat(firstClientName.concat(this.client.getCpf().substring(0, 3))).toLowerCase();
+		this.code = this.petName.concat(getFirtClientName().concat(this.client.getCpf().substring(0, 3))).toLowerCase();
+	}
+
+	private String getFirtClientName() {
+		return this.client.getFullName().split(" ")[0];
 	}
 
 	@JsonIgnore
 	@Transient
 	public String getClientCode() {
 		return this.client.getCode();
+	}
+
+	public String getClientName() {
+		return this.client.getFullName();
+	}
+
+	public void flushClient(ClientService clientService) throws ApiException {
+		this.client = clientService.findByCode(this.getClientCode());
+	}
+
+	public void update(Pet petBuildedByForm) {
+		
 	}
 }

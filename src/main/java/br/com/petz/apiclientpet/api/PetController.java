@@ -32,7 +32,7 @@ public class PetController implements PetAPI {
 
 	@Override
 	public Page<PetDTO> findByClientCode(String clientCode, 
-			@PageableDefault(sort = "code", direction = Direction.DESC, page = 0, size = 10) Pageable pageable) {
+			@PageableDefault(sort = "code", direction = Direction.DESC, page = 0, size = 10) Pageable pageable) throws ApiException {
 		log.info("Starting Method FindAll in Pet Controller!");
 		Page<Pet> pets = petService.findByClientCode(clientCode,pageable);
 		log.info("Convert pets to Page!");

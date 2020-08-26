@@ -1,9 +1,9 @@
 package br.com.petz.apiclientpet.api.dto.form;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import br.com.petz.apiclientpet.model.Client;
 import br.com.petz.apiclientpet.model.Pet;
@@ -20,7 +20,7 @@ import lombok.ToString;
 @Getter
 public class PetForm {
 	@NotBlank(message = "Petname Empty")
-	@Min(value = 3,message = "Petname must be at least 3 char")
+	@Size(min = 3,message = "Petname must be at least 3 char")
 	private String petName;
 
 	@NotNull(message = "Size Not Valid!")
