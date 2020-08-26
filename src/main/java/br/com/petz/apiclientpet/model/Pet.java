@@ -84,7 +84,12 @@ public class Pet {
 		this.client = clientService.findByCode(this.getClientCode());
 	}
 
-	public void update(Pet petBuildedByForm) {
-		
+	public void update(Pet petByForm) {
+		this.petName = petByForm.getPetName();
+		this.size = petByForm.getSize();
+		this.petType = petByForm.getPetType();
+		this.gender = petByForm.getGender();
+		this.color = petByForm.getColor();
+		this.weight = petByForm.getWeight();
 	}
 }

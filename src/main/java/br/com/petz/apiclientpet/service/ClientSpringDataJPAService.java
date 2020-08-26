@@ -3,11 +3,13 @@ package br.com.petz.apiclientpet.service;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.petz.apiclientpet.exception.ApiException;
+import br.com.petz.apiclientpet.exception.IndexViolationApiException;
 import br.com.petz.apiclientpet.model.Client;
 import br.com.petz.apiclientpet.repository.ClientRepository;
 import br.com.petz.apiclientpet.service.encrypt.PasswordEncrypter;
@@ -47,16 +49,24 @@ public class ClientSpringDataJPAService implements ClientService {
 	}
 
 	@Override
-	public Client save(Client client) throws NoSuchAlgorithmException {
+	public Client save(Client client) throws NoSuchAlgorithmException, ApiException {
 		log.info("Starting Method Save in ClientSpringDataJPAService");
 		log.info("Encrypting password");
 		client.encryptPassword(passwordEncrypter);
 		log.info("Building client code");
 		client.buildCode();
 		log.info("Save in clientRepository");
-		clientRepository.save(client);
+		saveRepository(client);
 		log.info("Finishing Method Save in ClientSpringDataJPAService");
 		return client;
+	}
+
+	private Client saveRepository(Client client) throws ApiException {
+		try {
+			return clientRepository.save(client);
+		} catch (DataIntegrityViolationException e) {
+			throw IndexViolationApiException.build(400L, "ERRO TO CREATE CLIENT", e);
+		}
 	}
 
 	@Override

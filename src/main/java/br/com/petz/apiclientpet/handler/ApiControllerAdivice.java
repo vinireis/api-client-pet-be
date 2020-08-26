@@ -50,7 +50,7 @@ public class ApiControllerAdivice {
 	}
 
 	@ExceptionHandler(ApiException.class)
-    public ResponseEntity<ApiErrorResponse> handleNotFoundException(ApiException ex) {
+    public ResponseEntity<ApiErrorResponse> handleApiException(ApiException ex) {
     	log.error("Error:",ex);
         ApiErrorResponse apiErrorResponse = this.apiErrorResponseExceptionExtractor.getApiResponse(ex, ex.getCode());
         return ResponseEntity.status(apiErrorResponse.getCode().intValue()).body(apiErrorResponse);
