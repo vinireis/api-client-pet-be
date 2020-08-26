@@ -40,6 +40,8 @@ public class ClientSpringDataJPAService implements ClientService {
 		log.info("Starting Method Save in ClientSpringDataJPAService");
 		log.info("Encrypting password");
 		client.encryptPassword(passwordEncrypter);
+		log.info("Building client code");
+		client.buildCode();
 		log.info("Save in clientRepository");
 		clientRepository.save(client);
 		log.info("Finishing Method Save in ClientSpringDataJPAService");

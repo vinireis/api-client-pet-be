@@ -11,6 +11,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class ClientDetailDTO {
 	private String fullName;
+	private String code;
 	private String email;
 	private String prefixCellPhoneNumber;
 	private String cellPhoneNumber;
@@ -20,6 +21,7 @@ public class ClientDetailDTO {
 
 	public ClientDetailDTO(Client client) {
 		this.fullName = client.getFullName();
+		this.code = client.getCode();
 		this.email = client.getEmail();
 		this.prefixCellPhoneNumber = client.getPrefixCellPhoneNumber();
 		this.cellPhoneNumber = client.getCellPhoneNumber();

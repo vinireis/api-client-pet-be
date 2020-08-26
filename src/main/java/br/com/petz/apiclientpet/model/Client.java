@@ -74,4 +74,11 @@ public class Client {
 	public String getEmail() {
 		return this.credential.getEmail();
 	}
+
+	public void buildCode() {
+		String[] nameParts = this.fullName.split(" ");
+		String firstName = nameParts[0];
+		String lastName = nameParts[nameParts.length - 1];
+		this.code = firstName.concat(lastName).concat(this.cpf.substring(0, 3)).toLowerCase();
+	}
 }
