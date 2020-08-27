@@ -63,9 +63,13 @@ public class Pet {
 	private Long weight;
 
 	public void buildCode() {
-		this.code = this.petName.concat(getFirtClientName().concat(this.client.getCpf().substring(0, 3))).toLowerCase();
+		this.code = getFirstPetName().concat(getFirtClientName().concat(this.client.getCpf().substring(0, 3))).toLowerCase();
 	}
 
+	private String getFirstPetName() {
+		return this.petName.split(" ")[0];
+	}
+	
 	private String getFirtClientName() {
 		return this.client.getFullName().split(" ")[0];
 	}
