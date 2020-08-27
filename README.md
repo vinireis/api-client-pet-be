@@ -25,10 +25,10 @@ mvn spring-boot:run
 * [Postman](https://www.postman.com/downloads/)
 
 ### Link to Test API Collection local
-- [Collection Local](https://raw.githubusercontent.com/vinireis/api-client-pet-be/master/src/main/resources/docs/Petz%20-%20teste.postman_collection-local.json?token=ABOTWFT3ONHLFZSGGMP37527I72CW)
+- [Collection Local](https://github.com/vinireis/api-client-pet-be/blob/master/src/main/resources/docs/Petz%20-%20teste.postman_collection-local.json)
 
 ### Link to access Test API Collection Heroku
-- [Collection Heroku](https://raw.githubusercontent.com/vinireis/api-client-pet-be/master/src/main/resources/docs/Petz%20-%20teste.postman_collection-heroku.json?token=ABOTWFXS4WNUBZM7HI4QOOC7I7Z74)
+- [Collection Heroku](https://github.com/vinireis/api-client-pet-be/blob/master/src/main/resources/docs/Petz%20-%20teste.postman_collection-heroku.json)
 
 ## Features
 Eu cliente preciso de APIs REST para que possa integrar meus sistemas com outros parceiros.
