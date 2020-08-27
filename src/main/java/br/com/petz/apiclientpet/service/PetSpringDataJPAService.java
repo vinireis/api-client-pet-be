@@ -1,7 +1,5 @@
 package br.com.petz.apiclientpet.service;
 
-import java.util.Optional;
-
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,15 +35,12 @@ public class PetSpringDataJPAService implements PetService {
 	@Override
 	public Pet findByCode(String clientCode, String petCode) throws ApiException {
 		log.info("Starting Method findByClientCode in PetSpringDataJPAService");
-		log.info("Parameters:clientCode = {}, petCode = {}", clientCode,petCode);
+		log.info("Parameters:clientCode = {}, petCode = {}", clientCode, petCode);
 		log.info("Finding pets by clientCode and petCode on petRepository");
-		Optional<Pet> pet = petRepository.findByClient_CodeAndCode(clientCode, petCode);
-		if(pet.isPresent()) {
-			log.info("Finishing Method findByClientCode in PetSpringDataJPAService");
-			return pet.get();
-		} else {
-			throw throwNotFoundApiException(clientCode, petCode);
-		}
+		Pet pet = petRepository.findByClient_CodeAndCode(clientCode, petCode)
+				.orElseThrow(() -> throwNotFoundApiException(clientCode, petCode));
+		log.info("Finishing Method findByClientCode in PetSpringDataJPAService");
+		return pet;
 	}
 
 	@Override
@@ -66,7 +61,7 @@ public class PetSpringDataJPAService implements PetService {
 		try {
 			return petRepository.save(petBuildedByForm);
 		} catch (DataIntegrityViolationException e) {
-			throw IndexViolationApiException.build(400L, "ERRO TO CREATE PET", e);
+			throw IndexViolationApiException.build(400L, "ERROR TO CREATE PET", e);
 		}
 	}
 
