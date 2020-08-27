@@ -16,15 +16,15 @@ import lombok.ToString;
 @EqualsAndHashCode
 @JsonInclude(Include.NON_NULL)
 public class PetDTO {
+	String petCode;
 	String petName;
 	String clientCode;
-	String clientName;
 	PetType petType;
 
 	private PetDTO(Pet pet) {
+		this.petCode = pet.getCode();
 		this.petName = pet.getPetName();
 		this.clientCode = pet.getClientCode();
-		this.clientName = pet.getClientName();
 		this.petType = pet.getPetType();
 	}
 
