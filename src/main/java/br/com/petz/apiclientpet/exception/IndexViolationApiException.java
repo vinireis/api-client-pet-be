@@ -15,7 +15,7 @@ public class IndexViolationApiException extends ApiException {
 	public static IndexViolationApiException build(Long code, String message, DataIntegrityViolationException e) {
 		String fieldViolated = extractFieldViolated(e);
 		return new IndexViolationApiException(400L,
-				message.concat(" - THERE IS A CLIENT WITH THIS " + fieldViolated));
+				message.concat(" - THERE IS A ENTITY WITH THIS " + fieldViolated));
 	}
 
 	private static String extractFieldViolated(DataIntegrityViolationException e) {

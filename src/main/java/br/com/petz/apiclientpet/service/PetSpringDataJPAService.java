@@ -2,11 +2,13 @@ package br.com.petz.apiclientpet.service;
 
 import java.util.Optional;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.petz.apiclientpet.exception.ApiException;
+import br.com.petz.apiclientpet.exception.IndexViolationApiException;
 import br.com.petz.apiclientpet.model.Pet;
 import br.com.petz.apiclientpet.repository.PetRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -55,9 +57,17 @@ public class PetSpringDataJPAService implements PetService {
 		log.info("Building pet code");
 		petBuildedByForm.buildCode();
 		log.info("Save in petRepository");
-		petRepository.save(petBuildedByForm);
+		saveRepository(petBuildedByForm);
 		log.info("Finishing Method save in PetSpringDataJPAService");
 		return petBuildedByForm;
+	}
+
+	private Pet saveRepository(Pet petBuildedByForm) throws ApiException {
+		try {
+			return petRepository.save(petBuildedByForm);
+		} catch (DataIntegrityViolationException e) {
+			throw IndexViolationApiException.build(400L, "ERRO TO CREATE PET", e);
+		}
 	}
 
 	@Override
@@ -68,7 +78,7 @@ public class PetSpringDataJPAService implements PetService {
 		log.info("Updating pet with form data");
 		petFound.update(petBuildedByForm);
 		log.info("Save in petRepository");
-		petRepository.save(petFound);
+		saveRepository(petFound);
 		log.info("Finishing Method update in PetSpringDataJPAService");
 		return petFound;
 	}
