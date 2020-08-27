@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "edc0a2d5-2d8c-432b-ad85-58c32c2ae3ab",
+		"name": "Petz - teste",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Client - Get All Page - 200",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/petz/app/v1/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client - Post Create- 201",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2dcced3b-71f9-4ca5-a13a-1220132aa6aa",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cellPhoneNumber\": \"99819-9913\",\r\n    \"cpf\": \"04639521545\",\r\n    \"email\": \"vinicius.reis@msn.com\",\r\n    \"fullName\": \"Vinicius Silva Reis\",\r\n    \"gender\": \"MALE\",\r\n    \"password\": \"123456\",\r\n    \"prefixCellPhoneNumber\": \"73\"\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client - Get by Client Code - 200",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client/viniciusreis046",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client",
+								"viniciusreis046"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client - Put - 200",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cellPhoneNumber\": \"99819-9913\",\r\n    \"email\": \"vinicius.reis@gmail.com\",\r\n    \"fullName\": \"Vinicius Reis\",\r\n    \"gender\": \"MALE\",\r\n    \"prefixCellPhoneNumber\": \"73\"\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client/viniciusreis046",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client",
+								"viniciusreis046"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client - Delete - 204",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client/viniciusreis046",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client",
+								"viniciusreis046"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Pet",
+			"item": [
+				{
+					"name": "Pet - Get all by Client Code - 200",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client/viniciusreis046/pet",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client",
+								"viniciusreis046",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pet - Post Create Client's Pet Thoth - 201",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"color\": \"black\",\r\n    \"gender\": \"MALE\",\r\n    \"petName\": \"Thoth\",\r\n    \"petType\": \"CAT\",\r\n    \"size\": \"SMALL\",\r\n    \"weight\": 5\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client/viniciusreis046/pet",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client",
+								"viniciusreis046",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pet - Post Create Client's Pet Tuco - 201",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"color\": \"white\",\r\n    \"gender\": \"MALE\",\r\n    \"petName\": \"Tuco Guilherme Barreto\",\r\n    \"petType\": \"DOG\",\r\n    \"size\": \"SMALL\",\r\n    \"weight\": 10\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client/viniciusreis046/pet",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client",
+								"viniciusreis046",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pet - Get by Cliente Code and Pet Code - 200",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client/viniciusreis046/pet/thothvinicius046",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client",
+								"viniciusreis046",
+								"pet",
+								"thothvinicius046"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pet - Put - 200",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"petName\": \"Thoth Novaes\",\r\n    \"size\": \"SMALL\",\r\n    \"petType\": \"CAT\",\r\n    \"gender\": \"MALE\",\r\n    \"color\": \"black\",\r\n    \"weight\": 6\r\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client/viniciusreis046/pet/thothvinicius046",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client",
+								"viniciusreis046",
+								"pet",
+								"thothvinicius046"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pet - Delete - 204",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/petz/app/v1/client/viniciusreis046/pet/thothvinicius046",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"petz",
+								"app",
+								"v1",
+								"client",
+								"viniciusreis046",
+								"pet",
+								"thothvinicius046"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
