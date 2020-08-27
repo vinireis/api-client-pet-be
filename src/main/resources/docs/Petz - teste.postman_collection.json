@@ -19,12 +19,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/petz/app/v1/client",
-							"protocol": "http",
+							"raw": "{{HOST}}/petz/app/v1/client",
 							"host": [
-								"localhost"
+								"{{HOST}}"
 							],
-							"port": "8080",
 							"path": [
 								"petz",
 								"app",
@@ -363,6 +361,35 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9e5c834e-1938-4496-828c-536351946718",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "db012f04-c77f-4139-9322-5771ec7a4b73",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "e8dd653f-9ff9-4c63-b1a3-0b924f422dd9",
+			"key": "HOST",
+			"value": "https://young-taiga-61640.herokuapp.com/"
 		}
 	],
 	"protocolProfileBehavior": {}
