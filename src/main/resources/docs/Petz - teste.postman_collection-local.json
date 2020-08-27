@@ -387,9 +387,9 @@
 	],
 	"variable": [
 		{
-			"id": "e8dd653f-9ff9-4c63-b1a3-0b924f422dd9",
+			"id": "a1ffb351-c1ca-4078-b4d0-456ec4f5bfae",
 			"key": "HOST",
-			"value": "https://young-taiga-61640.herokuapp.com/"
+			"value": "http://localhost:8080"
 		}
 	],
 	"protocolProfileBehavior": {}
