@@ -19,9 +19,9 @@ public class ApiErrorResponseExceptionExtractor {
 	}
 	public ApiErrorResponse getApiResponse(List<FormErro> listFormErros) {
 		return ApiErrorResponse.builder()
-				.description("FORM ERROS")
+				.description("FORM ERRORS")
 				.code((long) 400)
-				.message("ERRO TO VALID FORM")
+				.message("ERROR TO VALID FORM")
 				.validationsErrors(listFormErros)
 				.build();
 	}

@@ -1,7 +1,6 @@
 package br.com.petz.apiclientpet.service;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -39,13 +38,10 @@ public class ClientSpringDataJPAService implements ClientService {
 		log.info("Starting Method findByCode in ClientSpringDataJPAService");
 		log.info("Parameter:{}", clientCode);
 		log.info("Finding client by code on clientRepository");
-		Optional<Client> clientByCode = clientRepository.findByCode(clientCode);
-		if (clientByCode.isPresent()) {
-			log.info("Finishing Method findByCode in ClientSpringDataJPAService");
-			return clientByCode.get();
-		} else {
-			throw throwNotFoundApiException(clientCode);
-		}
+		Client client = clientRepository.findByCode(clientCode)
+				.orElseThrow(() -> throwNotFoundApiException(clientCode));
+		log.info("Finishing Method findByCode in ClientSpringDataJPAService");
+		return client;
 	}
 
 	@Override

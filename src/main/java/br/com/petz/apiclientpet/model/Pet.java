@@ -63,13 +63,24 @@ public class Pet {
 	private Long weight;
 
 	public void buildCode() {
-		this.code = getFirstPetName().concat(getFirtClientName().concat(this.client.getCpf().substring(0, 3))).toLowerCase();
+		this.code = new StringBuilder().append(getFirstPetName()).append(getFirtClientName()).append(getCPFsBegin())
+				.toString().toLowerCase();
 	}
 
+	@JsonIgnore
+	@Transient
+	private String getCPFsBegin() {
+		return this.client.getCpf().substring(0, 3);
+	}
+
+	@JsonIgnore
+	@Transient
 	private String getFirstPetName() {
 		return this.petName.split(" ")[0];
 	}
 	
+	@JsonIgnore
+	@Transient
 	private String getFirtClientName() {
 		return this.client.getFullName().split(" ")[0];
 	}
@@ -80,6 +91,8 @@ public class Pet {
 		return this.client.getCode();
 	}
 
+	@JsonIgnore
+	@Transient
 	public String getClientName() {
 		return this.client.getFullName();
 	}
